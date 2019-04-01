@@ -1,15 +1,9 @@
-// You have a heist getaway sack with a capacity, and n items in front of you
-// with sizes and worths. Figure out the maximum value you could
-// get with the items.
-
-// You are encouraged to make helper functions!
-
 public class Robbery {
 
 	// Using DP: Get the maximum value with capacity C and n items
-	public int Compare(int maxmize1, int maxmize2) {
-		if (maxmize1 > maximize2) return maxmize 1;
-		else return maxmzie 2;
+	public int Compare(int maximize1, int maximize2) {
+		if (maximize1 > maximize2) return maximize1;
+		else return maximize2;
 	
 	}
 	public int maximizeRobWorthRecur(
@@ -19,12 +13,15 @@ public class Robbery {
 		int n
 	) {
 		// fill in here, change the return
-		if(n == 0 || capacity = 0)
-		return 0;
-		if (capcity < worths[n-1])
-		return maximizeRobWorthRecur(capacity,sizes,worths,n-1)
-		else return Compare(worths[n-1]+maxmizeRobWorthRecur(capacity-sizes[n-1],sizes,worths,n-1), maxmizeRobWorthRecur(capacity,sizes,worths,n-1))
+		if(n == 0 || capacity == 0) {
+		return 0; 
 	}
+		if (capacity >= sizes[n-1]) {
+			return Compare(worths[n-1]+maximizeRobWorthRecur(capacity-sizes[n-1],sizes,worths,n-1), maximizeRobWorthRecur(capacity,sizes,worths,n-1));
+			}
+			else return maximizeRobWorthRecur(capacity,sizes,worths,n-1);
+		}
+	
 
 	public int maximizeRobWorthBottomUp(
 		int capacity,
@@ -33,20 +30,20 @@ public class Robbery {
 	) {
 		// fill in here, change the return
 	   int bottomCount, bottomCapacity;
-	   int l = sizes.length;
+       int l = sizes.length;
 	   int Temp[][] = new int[l+1][capacity+1];
-	   for (bottomCount = 0; bottomCount < = l; bottomCount++) {
+	   for (bottomCount = 0; bottomCount <= l; bottomCount++) {
 		  for(bottomCapacity = 0; bottomCapacity <= capacity; bottomCapacity++) {
 	   
 			  if (bottomCount ==0 || bottomCapacity ==0)
 	          Temp[bottomCount][bottomCapacity] = 0;
-	          else if(sizes[i-1] > bottomCapacity)
-	          Temp[bottomCount][bottomCapacity] = bottom[bottomCount-1][bottomCapacity];
+	          else if(sizes[bottomCount-1] > bottomCapacity)
+	          Temp[bottomCount][bottomCapacity] = Temp[bottomCount-1][bottomCapacity];
 	          else 
-	          Temp[bottomCount][bottomCapacity] = Compare(worth[bottomCount-1]+ Temp[bottomCount-1][bottomCapacity - sizes[i-1]],Temp[bottomCount-1][bottomCapacity]);
+	          Temp[bottomCount][bottomCapacity] = Compare(worths[bottomCount-1]+ Temp[bottomCount-1][bottomCapacity - sizes[bottomCount-1]],Temp[bottomCount-1][bottomCapacity]);
 		}
 		  }
-	    return Temp[l][capactiy];
+	    return Temp[l][capacity];
 	}
 	
 
