@@ -7,13 +7,23 @@
 public class Robbery {
 
 	// Using DP: Get the maximum value with capacity C and n items
+	public int Compare(int maxmize1, int maxmize2) {
+		if (maxmize1 > maximize2) return maxmize 1;
+		else return maxmzie 2;
+	
+	}
 	public int maximizeRobWorthRecur(
 		int capacity,
 		int[] sizes,
-		int[] worths
+		int[] worths,
+		int n
 	) {
 		// fill in here, change the return
-			return 0;
+		if(n == 0 || capacity = 0)
+		return 0;
+		if (capcity < worths[n-1])
+		return maximizeRobWorthRecur(capacity,sizes,worths,n-1)
+		else return Compare(worths[n-1]+maxmizeRobWorthRecur(capacity-sizes[n-1],sizes,worths,n-1), maxmizeRobWorthRecur(capacity,sizes,worths,n-1))
 	}
 
 	public int maximizeRobWorthBottomUp(
@@ -22,8 +32,23 @@ public class Robbery {
 		int[] worths
 	) {
 		// fill in here, change the return
-		return 0;
+	   int bottomCount, bottomCapacity;
+	   int l = sizes.length;
+	   int Temp[][] = new int[l+1][capacity+1];
+	   for (bottomCount = 0; bottomCount < = l; bottomCount++) {
+		  for(bottomCapacity = 0; bottomCapacity <= capacity; bottomCapacity++) {
+	   
+			  if (bottomCount ==0 || bottomCapacity ==0)
+	          Temp[bottomCount][bottomCapacity] = 0;
+	          else if(sizes[i-1] > bottomCapacity)
+	          Temp[bottomCount][bottomCapacity] = bottom[bottomCount-1][bottomCapacity];
+	          else 
+	          Temp[bottomCount][bottomCapacity] = Compare(worth[bottomCount-1]+ Temp[bottomCount-1][bottomCapacity - sizes[i-1]],Temp[bottomCount-1][bottomCapacity]);
+		}
+		  }
+	    return Temp[l][capactiy];
 	}
+	
 
 /**
 * Bonus: figure out which items exactly
@@ -40,8 +65,9 @@ public class Robbery {
 		int bagCapacity = 40;
 		int[] itemSizes = {2, 25, 6, 13, 1, 15, 8, 5, 17, 4};
 		int[] itemWorths = {35, 120, 900, 344, 29, 64, 67, 95, 33, 10};
+		int arrayLength = itemSizes.length;
 
-		int maxWorthRecur = r.maximizeRobWorthRecur(bagCapacity, itemSizes, itemWorths);
+		int maxWorthRecur = r.maximizeRobWorthRecur(bagCapacity, itemSizes, itemWorths,arrayLength);
 		System.out.println("Max worth of the bag: " + maxWorthRecur);
 		int maxWorthBottomUp = r.maximizeRobWorthBottomUp(bagCapacity, itemSizes, itemWorths);
 		System.out.println("Max worth of the bag: " + maxWorthBottomUp);
